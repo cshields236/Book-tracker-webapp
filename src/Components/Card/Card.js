@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import React, { Component } from 'react'
 import FlipBook from '../Card/FlipBook'
-
+import styles from './Card.module.css'
 
 class Card extends Component {
     constructor(props) {
@@ -36,12 +36,10 @@ class Card extends Component {
 
     render() {
         return (
-
-
-
-            <div>
+            <div className={styles.Card}>
                 {this.state.books.map(book => (
-                    <FlipBook
+                    <FlipBook 
+                        key = {book.id}
                         title={book.title}
                         author={book.author}
                         genre={book.genre}

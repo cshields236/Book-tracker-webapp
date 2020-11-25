@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Flippy, { FrontSide, BackSide } from 'react-flippy'
-
+import cover from '../../assets/cover.jpg'
+import "./styles.css";
 class FlipBook extends Component{
     constructor(props) {
         super(props)
@@ -15,17 +16,24 @@ class FlipBook extends Component{
         return (
             <Flippy
                 flipOnHover={false} flipOnClick={true} flipDirection='horizontal' ref={(r) => this.flippy = r}
-                style={{ width: '200px', height: '300px' }}
+                style={{ width: '200px', height: '300px', padding: '10px', display: 'flexbox' }}
             >
                 <FrontSide style={{
-                    backgroundColor: '#41669d',
+                    backgroundColor: '#CCFBFF',
+                    
                 }} >
+                    <img className='photo' src={cover} alt='cover' />
+                    <strong>
                     {this.props.title}
+                    </strong>
+                    
+                    
+                    <br />
                     {this.props.author}
                 </FrontSide>
 
                 <BackSide
-                    style={{ backgroundColor: '#175852' }}>
+                    style={{ backgroundColor: '#CCCCFF' }}>
                     {this.props.genre}
                 </BackSide>
 
