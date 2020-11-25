@@ -14,7 +14,6 @@ class Card extends Component {
         }
     }
     componentDidMount() {
-
         Axios.get('http://127.0.0.1:5000/show-books')
             .then(res => {
 
@@ -43,6 +42,10 @@ class Card extends Component {
                         title={book.title}
                         author={book.author}
                         genre={book.genre}
+                        pages={book.pages}
+                        startdate={book.startdate}
+                        enddate={book.enddate}
+                        progress={book.progress}
                     />
 
                 ))}

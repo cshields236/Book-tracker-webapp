@@ -26,15 +26,23 @@ class FlipBook extends Component{
                     <strong>
                     {this.props.title}
                     </strong>
-                    
-                    
                     <br />
                     {this.props.author}
                 </FrontSide>
 
                 <BackSide
-                    style={{ backgroundColor: '#CCCCFF' }}>
-                    {this.props.genre}
+                    style={{ backgroundColor: '#CCCCFF',  fontSize: 'large', paddingTop: '30%' }}>
+                        
+                  <b>Genre:</b>   {this.props.genre}
+                  <br />
+                  <b>Number of Pages:</b>   {this.props.pages}
+                  <br />
+                  <b>Start Date:</b>   {this.props.startdate}
+                  <br />
+                  <b>End Date:</b>   {this.props.enddate}
+                  <br />
+                  <b>Progress:</b>   {this.props.progress}
+
                 </BackSide>
 
 

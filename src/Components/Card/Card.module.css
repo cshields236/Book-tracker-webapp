@@ -1,6 +1,9 @@
 .Card{
-    background-color: rgb(58, 57, 57);
+    
     padding: 25px;
     padding-top: 100px;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
   
 }
