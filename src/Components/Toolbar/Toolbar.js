@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, {  useState } from 'react'
 
 
 function Toolbar() {
@@ -16,7 +16,7 @@ function Toolbar() {
                     <li><a>View Read</a></li>
                     <li><a>Update Progress</a></li>
                 </ul>
-                <i onClick={() => setOpen(!open)} class="fas fa-bars burger"></i>
+                <i onClick={() => setOpen(!open)} className= {open ? 'fas fa-times burger '   : 'fas fa-bars burger' } />
             </nav>
 
         </div>

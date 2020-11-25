@@ -52,6 +52,8 @@ li{
 }
 
 nav{
+  z-index: 10;
+  position: relative;
   display: flex;
   justify-content: space-around;
   min-width: 10vh;
