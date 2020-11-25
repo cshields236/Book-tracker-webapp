@@ -8,7 +8,7 @@ class Toolbar extends Component {
         return (
             <div>
                 <nav>
-                    <div className='logo'>BOOK SELECTOR</div>
+                    <div className='logo'>Book Tracker</div>
                     <ul className='nav-links'>
                         <li><a>Home</a></li>
                         <li><a>View List</a></li>
