@@ -84,5 +84,76 @@ nav .nav-links a:hover{
 
 }
 
+nav .burger {
+  font-size: 30px;
+  display: none;
+  cursor: pointer;
+}
+
+@media all and (max-width: 768px){
+  nav .burger{
+    display: block;
+  }
+  nav .logo{
+    transform: translateX(0px);
+    transition: 0.5s ease-in-out;
+  }
+  nav .nav-links{
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 50% ;
+    padding: 40px;
+    background-color: #ff5f6d;
+    transform: translateX(-500px);
+    transition: 0.5s ease-in-out;
+  }
+
+  nav .nav-links li{
+    padding: 60px;
+    border-bottom:  1px solid bisque;
+
+  }
+
+ 
+  nav .nav-links a:hover{
+    border-bottom: 0px solid white;
+  }
+}
 
 
+@media all and (max-width: 450px){
+  nav .burger{
+    display: block;
+  }
+
+  nav .logo{
+    transform: translateX(0px);
+    transition: 0.5s ease-in-out;
+  }
+  nav .nav-links{
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 120vh;
+    width: 50% ;
+    padding: 10px;
+    background-color: #ff5f6d;
+    transform: translateX(-500px);
+    transition: 0.5s ease-in-out;
+  }
+
+  nav .nav-links li{
+    padding: 45px;
+    border-bottom:  1px solid bisque;
+
+  }
+
+ 
+  nav .nav-links a:hover{
+    border-bottom: 0px solid white;
+  }
+}
