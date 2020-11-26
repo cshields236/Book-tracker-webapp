@@ -19,26 +19,14 @@ class AddBook extends Component {
         }
     }
 
-    handleTitleChange = (event) => {
+    handleChange = (event) => {
         this.setState({
-            title: event.target.value
+            [event.target.name]: event.target.value
         })
-    }
 
-    handleAuthorChange = (event) => {
-        this.setState({
-            author: event.target.value
-        })
-    }
-
-    handleGenreChange = (event) => {
-        this.setState({
-            genre: event.target.value
-        })
     }
 
 
-    
 
         handleSubmit = (event) => {
          
@@ -61,14 +49,14 @@ class AddBook extends Component {
             <form onSubmit={this.handleSubmit}>
                 <div>
                     <label>Title</label>
-                    <input type='text' value={this.state.title} onChange={this.handleTitleChange} />
+                    <input type='text' name='title' value={this.state.title} onChange={this.handleChange} />
                 </div>
                 <div>
                     <label>Author</label>
-                    <input type='text' value={this.state.author} onChange={this.handleAuthorChange} />
+                    <input type='text' name='author' value={this.state.author} onChange={this.handleChange} />
                 </div>
                 Genre
-                <select value={this.state.genre} onChange={this.handleGenreChange}>
+                <select value={this.state.genre} name='genre' onChange={this.handleChange}>
                     <option value='fiction'>Fiction </option>
                     <option value='history'>History</option>
                     <option value='sport'>Sport</option>
@@ -87,6 +75,7 @@ class AddBook extends Component {
     // TODO: Fix UI 
     // TODO: Look into adding and saving pics 
     // TODO: Sort out database 
+    // TODO: Add Routing 
 
 }
 
