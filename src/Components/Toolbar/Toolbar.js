@@ -1,12 +1,12 @@
 import React, {  useState } from 'react'
-
+import styles from './Toolbar.css'
 
 function Toolbar() {
     const [open, setOpen] = useState(false);
 
 
     return (
-        <div>
+        <div className={styles}>
             <nav>
                 <div className='logo' style={{transform: open ? "translateX(-500px)" : ""}}>Book Tracker</div>
                 <ul className='nav-links' style={{transform: open ? "translateX(0px)" : ""}}>
