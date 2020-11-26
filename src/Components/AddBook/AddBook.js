@@ -82,6 +82,12 @@ class AddBook extends Component {
 
         )
     }
+
+    // TODO: Add rest of fields for data input
+    // TODO: Fix UI 
+    // TODO: Look into adding and saving pics 
+    // TODO: Sort out database 
+
 }
 
 export default AddBook
