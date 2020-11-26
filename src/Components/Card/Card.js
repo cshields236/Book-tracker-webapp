@@ -35,7 +35,9 @@ class Card extends Component {
 
     render() {
         return (
+            
             <div className={styles.Card}>
+               
                 {this.state.books.map(book => (
                     <FlipBook 
                         key = {book.id}

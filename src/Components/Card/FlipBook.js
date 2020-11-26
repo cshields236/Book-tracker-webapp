@@ -16,10 +16,10 @@ class FlipBook extends Component{
         return (
             <Flippy
                 flipOnHover={false} flipOnClick={true} flipDirection='horizontal' ref={(r) => this.flippy = r}
-                style={{ width: '200px', height: '300px', padding: '10px', display: 'flexbox' }}
+                style={{ width: '20%', height: '10%', padding: '30px', display: 'flexbox' }}
             >
                 <FrontSide style={{
-                    backgroundColor: '#CCFBFF',
+                    backgroundColor: '	#DDA0DD',
                     
                 }} >
                     <img className='photo' src={cover} alt='cover' />
@@ -31,12 +31,10 @@ class FlipBook extends Component{
                 </FrontSide>
 
                 <BackSide
-                    style={{ backgroundColor: '#CCCCFF',  fontSize: 'large', paddingTop: '30%' }}>
+                    style={{ backgroundColor: '#CCCCFF',  fontSize: 'larger', paddingTop: '30%' }}>
                         
                   <b>Genre:</b>   {this.props.genre}
-                  <br />
-                  <b>Number of Pages:</b>   {this.props.pages}
-                  <br />
+                  <b>Number of Pages:</b>   {this.props.pages}  
                   <b>Start Date:</b>   {this.props.startdate}
                   <br />
                   <b>End Date:</b>   {this.props.enddate}
@@ -44,9 +42,6 @@ class FlipBook extends Component{
                   <b>Progress:</b>   {this.props.progress}
 
                 </BackSide>
-
-
-
             </Flippy>
 
         )
