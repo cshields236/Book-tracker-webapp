@@ -39,13 +39,7 @@ class AddBook extends Component {
     }
 
     fileUploadHandler = () => {
-        const fd = new FormData();
-        fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
-        console.log(fd);
-        axios.post('http://127.0.0.1:5000/add-cover', fd)
-            .then(res => {
-                console.log(res);
-            })
+
     }
 
 
@@ -60,8 +54,16 @@ class AddBook extends Component {
                     bookAdded: true
                 })
             }
+        }).then(r => {
+            const fd = new FormData();
+            fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
+            console.log(fd);
+            axios.post('http://127.0.0.1:5000/add-cover', fd)
+                .then(res => {
+                    console.log(res);
+                })
         }).catch(err => {
-            console.log(err);
+            console.log(err)
         })
     }
 
@@ -100,7 +102,8 @@ class AddBook extends Component {
 
 
                         <br />
-                        <label>Upload Cover Image</label>
+                        <label>Upload Cover Image</label>   <br />
+                        <input type='file' name='author' value={this.state.coverImg} onChange={this.fileSelectedHandler} />
                         <div>
 
                         </div>
@@ -115,11 +118,11 @@ class AddBook extends Component {
 
                 </div>
 
+                {/* <div>
 
-                <div>
-                    <input type='file' name='author' value={this.state.coverImg} onChange={this.fileSelectedHandler} />
                     <button onClick={this.fileUploadHandler}>Upload</button>
-                </div>
+                </div> */}
+
             </Auxilery>
 
 
