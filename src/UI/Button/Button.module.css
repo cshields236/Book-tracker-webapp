@@ -1,8 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
 .Button {
   position: absolute;
-  left: 50%;
-  top: 50%;
+
   height: 100px;
   width: 300px;
   -webkit-transform: translate(-50%, -50%);
