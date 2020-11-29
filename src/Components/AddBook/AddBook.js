@@ -3,6 +3,7 @@ import axios from 'axios'
 import classes from './AddBook.module.css'
 import Button from '../../UI/Button/Button'
 import Auxilery from '../../UI/HOC/Auxilery'
+import { green, red } from '@material-ui/core/colors'
 
 class AddBook extends Component {
     constructor(props) {
@@ -13,13 +14,9 @@ class AddBook extends Component {
             title: '',
             author: '',
             genre: 'fiction',
-            startdate: '',
-            enddate: '',
-            pages: 0,
-            progress: 0,
-            finished: false,
             selectedFile: null,
-            bookAdded: null
+            bookAdded: null,
+            disabled: false
 
         }
     }
@@ -38,15 +35,15 @@ class AddBook extends Component {
         console.log(event);
     }
 
-    fileUploadHandler = () => {
-
-    }
-
-
     handleSubmit = (event) => {
-
-        event.preventDefault();
-
+        if (this.state.selectedFile === null){
+            event.preventDefault()
+            alert('Please Upload a Cover Image')
+        }else{
+        
+        this.setState({
+            disabled: true
+        })
         axios.post('http://127.0.0.1:5000/add-book', this.state).then(res => {
             if (res.data.success) {
                 console.log(res)
@@ -64,12 +61,10 @@ class AddBook extends Component {
                 })
         }).catch(err => {
             console.log(err)
-        })
+        })}
     }
 
     render() {
-
-
         return (
             <Auxilery>
                 <div>
@@ -78,16 +73,16 @@ class AddBook extends Component {
                         <u>
                             <h1>Add A New Book</h1>
                         </u>
-
                     </center>
+
                     <form className={classes.Form} onSubmit={this.handleSubmit}>
                         <label>Title</label>
                         <div>
-                            <input type='text' name='title' value={this.state.title} onChange={this.handleChange} />
+                            <input required type='text' name='title' value={this.state.title} onChange={this.handleChange} />
                         </div>
                         <label>Author</label>
                         <div>
-                            <input type='text' name='author' value={this.state.author} onChange={this.handleChange} />
+                            <input required type='text' name='author' value={this.state.author} onChange={this.handleChange} />
                         </div>
 
                         <label> Genre</label><br />
@@ -99,35 +94,36 @@ class AddBook extends Component {
                             <option value='memoir'>Memoir</option>
                             <option value='investigative'>Investigative</option>
                         </select>
-
-
                         <br />
                         <label>Upload Cover Image</label>   <br />
-                        <input type='file' name='author' value={this.state.coverImg} onChange={this.fileSelectedHandler} />
+
+                        <input
+                            type='file' name='upload'
+                            style={{ display: 'none' }}
+                            value={this.state.coverImg}
+                            onChange={this.fileSelectedHandler}
+                            ref={fileInput => this.fileInput = fileInput} />
+                        <button
+                            style={{
+                                border: '1px solid  #ff5f6d',
+                                display: 'inline-block',
+                                backgroundColor: 'bisque',
+                                color: 'black',
+                                padding: '6px 12px',
+                                cursor: 'pointer',
+                            }}
+                            onClick={() => this.fileInput.click()} >Pick File</button>
                         <div>
-
                         </div>
-
                         <br />
                         <br />
-
-                        <Button >submit</Button>
+                        <Button disabled={this.state.disabled} >Add Book</Button>
+                        
+                        {this.state.bookAdded === true && <p style={{color: green, }}>Book Added!</p>}
+                        {this.state.emailSent === false && <p style={{color: red, }} >Book Not Added!</p>}
                     </form>
-
-
-
                 </div>
-
-                {/* <div>
-
-                    <button onClick={this.fileUploadHandler}>Upload</button>
-                </div> */}
-
             </Auxilery>
-
-
-
-
         )
     }
 
