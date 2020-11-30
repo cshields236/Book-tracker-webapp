@@ -2,7 +2,7 @@ import Axios from 'axios'
 import React, { Component } from 'react'
 import FlipBook from '../Card/FlipBook'
 import styles from './Card.module.css'
-
+import { Col, Container, Row } from 'react-bootstrap'
 class Card extends Component {
     constructor(props) {
         super(props)
@@ -34,21 +34,24 @@ class Card extends Component {
     render() {
         return (
 
-            <div className={styles.Card}>
+           
+                <div className={styles.Card} md="auto" style={{height: '100%', display:'flex',  alignItems:'strech', flexWrap:'wrap' }} >
+                   
+                        {this.state.books.map(book => (
+                            <FlipBook
 
-                {this.state.books.map(book => (
-                    <FlipBook
-
-                        key={book.id}
-                        title={book.title}
-                        author={book.author}
-                        genre={book.genre}
+                                key={book.id}
+                                title={book.title}
+                                author={book.author}
+                                genre={book.genre}
 
 
-                    />
+                            />
 
-                ))}
-            </div>
+                        ))}
+              
+                </div>
+          
         )
     }
 }
