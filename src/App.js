@@ -2,17 +2,22 @@ import './App.css';
 import AddBook from './Components/AddBook/AddBook';
 import Card from './Components/Card/Card';
 import Toolbar from './Components/Toolbar/Toolbar';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Component } from 'react';
 
-function App() {
-  return (
-    <div>
-      <Toolbar />
-      <AddBook />
-      {/* <Card /> */}
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Router>
+          <Toolbar />
+          <Route path='/' exact component={AddBook} />
+          <Route path='/view' exact component={Card} />
+        </Router>
+      </div>
 
-    </div>
-
-  );
+    );
+  }
 }
 
 export default App;

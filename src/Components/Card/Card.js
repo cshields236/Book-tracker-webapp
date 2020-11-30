@@ -9,9 +9,11 @@ class Card extends Component {
 
         this.state = {
             books: [],
-            loading: false
+            loading: false,
+
 
         }
+
     }
     componentDidMount() {
         Axios.get('http://127.0.0.1:5000/show-books')
@@ -28,26 +30,21 @@ class Card extends Component {
 
             })
 
-
     }
-
-
-
     render() {
         return (
-            
+
             <div className={styles.Card}>
-               
+
                 {this.state.books.map(book => (
-                    <FlipBook 
-                        key = {book.id}
+                    <FlipBook
+
+                        key={book.id}
                         title={book.title}
                         author={book.author}
                         genre={book.genre}
-                        pages={book.pages}
-                        startdate={book.startdate}
-                        enddate={book.enddate}
-                        progress={book.progress}
+
+
                     />
 
                 ))}

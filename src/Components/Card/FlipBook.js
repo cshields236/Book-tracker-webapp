@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
 import Flippy, { FrontSide, BackSide } from 'react-flippy'
-import cover from '../../assets/cover.jpg'
 import "./styles.css";
-class FlipBook extends Component{
+class FlipBook extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             books: [],
+            cover: null,
+            base64File: '',
             loading: false
 
         }
     }
+
+
     render() {
         return (
             <Flippy
@@ -19,29 +22,25 @@ class FlipBook extends Component{
                 style={{ width: '20%', height: '10%', padding: '30px', display: 'flexbox' }}
             >
                 <FrontSide style={{
-                    backgroundColor: '	#DDA0DD',
-                    
+                    backgroundColor: '#DDA0DD',
+
                 }} >
-                    <img className='photo' src={cover} alt='cover' />
+                    <img className='photo' src="http://127.0.0.1:5000/8" alt='cover' />
                     <strong>
-                    {this.props.title}
+                        {this.props.title}
                     </strong>
                     <br />
                     {this.props.author}
                 </FrontSide>
 
                 <BackSide
-                    style={{ backgroundColor: '#CCCCFF',  fontSize: 'larger', paddingTop: '30%' }}>
-                        
-                  <b>Genre:</b>   {this.props.genre}
-                  <b>Number of Pages:</b>   {this.props.pages}  
-                  <b>Start Date:</b>   {this.props.startdate}
-                  <br />
-                  <b>End Date:</b>   {this.props.enddate}
-                  <br />
-                  <b>Progress:</b>   {this.props.progress}
+                    style={{ backgroundColor: '#CCCCFF', fontSize: 'larger', paddingTop: '30%' }}>
 
+                    <b>Genre:</b>   {this.props.genre}
+
+                  
                 </BackSide>
+                
             </Flippy>
 
         )
