@@ -13,7 +13,7 @@
    
 }
 
-.Form input{
+.Form input[type=text]{
     background-color: bisque;
     height: 45px;
     width: 400px;

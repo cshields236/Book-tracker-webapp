@@ -2,7 +2,7 @@ import Axios from 'axios'
 import React, { Component } from 'react'
 import FlipBook from '../Card/FlipBook'
 import styles from './Card.module.css'
-import { Col, Container, Row } from 'react-bootstrap'
+import Aux from 'react-aux';
 class Card extends Component {
     constructor(props) {
         super(props)
@@ -23,7 +23,7 @@ class Card extends Component {
                 for (let key in res.data) {
                     fetchedBooks.push({
                         ...res.data[key],
-                        id: key
+                        id: parseInt(key) + 1
                     })
                     this.setState({ books: fetchedBooks })
                 }
@@ -32,26 +32,32 @@ class Card extends Component {
 
     }
     render() {
+        // console.log(this.state.books);
         return (
-
-           
-                <div className={styles.Card} md="auto" style={{height: '100%', display:'flex',  alignItems:'strech', flexWrap:'wrap' }} >
-                   
-                        {this.state.books.map(book => (
-                            <FlipBook
-
-                                key={book.id}
-                                title={book.title}
-                                author={book.author}
-                                genre={book.genre}
+            <Aux>
 
 
-                            />
 
-                        ))}
-              
+                <h1>Your Library</h1>
+                <div className={styles.Card} md="auto" >
+
+                    {this.state.books.map(book => (
+                        <FlipBook
+                            key = {book.id}
+                            identifier={book.id} 
+                            title={book.title}
+                            author={book.author}
+                            genre={book.genre}
+                            cover={book.cover}
+
+
+                        />
+
+                    ))}
+
                 </div>
-          
+            </Aux>
+
         )
     }
 }

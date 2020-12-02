@@ -3,7 +3,7 @@ import axios from 'axios'
 import classes from './AddBook.module.css'
 import Button from '../../UI/Button/Button'
 import Auxilery from '../../UI/HOC/Auxilery'
-import { green, red } from '@material-ui/core/colors'
+import { storage } from '../../firebase'
 
 class AddBook extends Component {
     constructor(props) {
@@ -14,7 +14,9 @@ class AddBook extends Component {
             title: '',
             author: '',
             genre: 'fiction',
+            coverUrl: null,
             selectedFile: null,
+            progress: 0,
             bookAdded: null,
             disabled: false
 
@@ -28,44 +30,72 @@ class AddBook extends Component {
         })
 
     }
+    handleUpload = (event) => {
+        event.preventDefault()
+        const uploadTask = storage.ref(`covers/${this.state.selectedFile.name}`).put(this.state.selectedFile);
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                this.setState({
+                    progress: progress
+                })
+            },
+            error => {
+                console.log(error);
+            },
+            () => {
+                storage
+                    .ref("covers")
+                    .child(this.state.selectedFile.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        this.setState({
+                            coverUrl: url
+                        })
+                    });
+            }
+        );
+    };
+
     fileSelectedHandler = (event) => {
-        this.setState({
-            selectedFile: event.target.files[0]
-        })
-        console.log(event);
+        if (event.target.files[0]) {
+            this.setState({
+                selectedFile: event.target.files[0]
+            })
+        }
+
     }
 
     handleSubmit = (event) => {
-        if (this.state.selectedFile === null){
+        if (this.state.selectedFile === null) {
             event.preventDefault()
             alert('Please Upload a Cover Image')
-        }else{
-        
-        this.setState({
-            disabled: true
-        })
-        axios.post('http://127.0.0.1:5000/add-book', this.state).then(res => {
-            if (res.data.success) {
-                console.log(res)
-                this.setState({
-                    bookAdded: true
-                })
-            }
-        }).then(r => {
-            const fd = new FormData();
-            fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
-            console.log(fd);
-            axios.post('http://127.0.0.1:5000/add-cover', fd)
-                .then(res => {
-                    console.log(res);
-                })
-        }).catch(err => {
-            console.log(err)
-        })}
+        } else {
+
+            this.setState({
+                disabled: true
+            })
+            axios.post('http://127.0.0.1:5000/add-book', this.state).then(res => {
+                if (res.data.success) {
+                    console.log(res)
+                    this.setState({
+                        bookAdded: true
+                    })
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+        }
     }
 
     render() {
+        console.log(this.state.progress);
+       
         return (
+
             <Auxilery>
                 <div>
                     <br />
@@ -97,32 +127,35 @@ class AddBook extends Component {
                         <br />
                         <label>Upload Cover Image</label>   <br />
 
-                        <input
-                            type='file' name='upload'
-                            style={{ display: 'none' }}
-                            value={this.state.coverImg}
-                            onChange={this.fileSelectedHandler}
-                            ref={fileInput => this.fileInput = fileInput} />
-                        <button
-                            style={{
-                                border: '1px solid  #ff5f6d',
-                                display: 'inline-block',
-                                backgroundColor: 'bisque',
-                                color: 'black',
-                                padding: '6px 12px',
-                                cursor: 'pointer',
-                            }}
-                            onClick={() => this.fileInput.click()} >Pick File</button>
+
                         <div>
                         </div>
+                       
+                        <input
+                        style={{color: 'bisque'}}
+                        type='file' name='upload'
+
+                        value={this.state.coverImg}
+                        onChange={this.fileSelectedHandler}
+                        ref={fileInput => this.fileInput = fileInput} />
+                        <button onClick={this.handleUpload}>Upload</button>
                         <br />
                         <br />
-                        <Button disabled={this.state.disabled} >Add Book</Button>
-                        
-                        {this.state.bookAdded === true && <p style={{color: green, }}>Book Added!</p>}
-                        {this.state.emailSent === false && <p style={{color: red, }} >Book Not Added!</p>}
+                        <br />
+                      
+                        <Button disabled={this.state.progress === 0 ? true : false} >Add Book</Button>
+
+
                     </form>
+
+                    <br />
+                    <br />   <br />
+                    <br />
+                   
+                    
                 </div>
+
+
             </Auxilery>
         )
     }

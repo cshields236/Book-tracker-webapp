@@ -3,5 +3,33 @@
   height: 100vh;
  
     color: black;
+    padding-top: 50px;
+     height: 100%;
+    display: flex; 
+    align-items: stretch;
+      flex-wrap: wrap; 
+}
+
+h1{
+  padding-top: 40px;
+  font-size: 30px;
+  text-decoration: underline;
+  color: bisque;
+  text-align: center;
+}
+
+
+
+@media all and (max-width: 768px){
+  .Card{
+    width: 100%;
+    height: 100vh;
+      color: black;
+      padding-top: 50px;
+       height: 100%;
+      display: block; 
+      align-items: stretch;
+        flex-wrap: wrap; 
+  }
   
 }

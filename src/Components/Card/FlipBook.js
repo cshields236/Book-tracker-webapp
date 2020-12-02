@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import Flippy, { FrontSide, BackSide } from 'react-flippy'
-import "./styles.css";
-import Radn from 'randomcolor'
-import { colors } from 'material-ui/styles';
+import classes from './FlipBook.module.css'
+
 class FlipBook extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            books: [],
-            cover: null,
-            base64File: '',
             loading: false
 
         }
@@ -27,37 +23,44 @@ class FlipBook extends Component {
 
     render() {
         let color = this.getRandomColor()
+        console.log(this.props.title);
         return (
-            <Flippy
-                flipOnHover={false} flipOnClick={true} flipDirection='horizontal' ref={(r) => this.flippy = r}
-                style={{ width: '20%',padding: '30px'}}
-            >
-                <FrontSide style={{
-                    backgroundColor: color,
+            <div className={classes.Flippy}>
+                <Flippy
+                    flipOnHover={false} flipOnClick={true} flipDirection='horizontal' ref={(r) => this.flippy = r}
 
-                }} >
-                    <img className='photo' src="http://127.0.0.1:5000/8" alt='cover' />
+                >
+                    <FrontSide style={{
+                        backgroundColor: color,
 
-                </FrontSide>
+                    }} >
+                        <img className={classes.photo} src={this.props.cover} alt='cover' />
 
-                <BackSide
-                    style={{ backgroundColor: '#ff5f6d', fontSize: 'larger', paddingTop: '30%' }}>
-                    
-                    <b>Title:</b>  
-                    <br />
+                    </FrontSide>
+
+                    <BackSide
+                        style={{
+                            backgroundColor: '#ff5f6d',
+                            fontSize: '40px',
+                            paddingTop: '30%'
+                        }}
+                    >
+
+                        <b>Title:</b>
+                        <br />
                         {this.props.title}
-                    <br />
-                    <b>Author:</b>
-                    <br />
-                    {this.props.author}
-                    <br />
-                    <b>Genre:</b>  <br />  {this.props.genre}
+                        <br />
+                        <b>Author:</b>
+                        <br />
+                        {this.props.author}
+                        <br />
+                        <b>Genre:</b>  <br />  {this.props.genre}
 
 
-                </BackSide>
+                    </BackSide>
 
-            </Flippy>
-
+                </Flippy>
+            </div>
         )
     }
 
