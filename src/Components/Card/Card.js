@@ -33,7 +33,6 @@ class Card extends Component {
 
     }
     render() {
-        // console.log(this.state.books);
 
         let card = (<Spinner />)
 
@@ -49,11 +48,13 @@ class Card extends Component {
                         {this.state.books.map(book => (
                             <FlipBook
                                 key={book.id}
-                                identifier={book.id}
                                 title={book.title}
                                 author={book.author}
                                 genre={book.genre}
                                 cover={book.cover}
+                                isbn={book.isbn}
+                                avg_rating={book.avg_rating}
+                                description={book.description}
 
 
                             />

@@ -25,8 +25,10 @@ class FlipBook extends Component {
         let color = this.getRandomColor()
      
         return (
-            <div className={classes.Flippy}>
+       <div  className={classes.Flippy}>
                 <Flippy
+               
+                
                     flipOnHover={false} flipOnClick={true} flipDirection='horizontal' ref={(r) => this.flippy = r}
 
                 >
@@ -35,17 +37,19 @@ class FlipBook extends Component {
 
                     }} >
                         <img className={classes.photo} src={this.props.cover} alt='cover' />
+                        <b>{this.props.title}</b><br/>
+                          <b>{this.props.author}</b>
 
                     </FrontSide>
 
                     <BackSide
                         style={{
                             backgroundColor: '#ff5f6d',
-                            fontSize: '40px',
+                            
                             paddingTop: '30%'
                         }}
                     >
-
+{/* 
                         <b>Title:</b>
                         <br />
                         {this.props.title}
@@ -55,12 +59,15 @@ class FlipBook extends Component {
                         {this.props.author}
                         <br />
                         <b>Genre:</b>  <br />  {this.props.genre}
+                        <br />
+                        <b>isbn:</b>  <br />  {this.props.isbn} */}
 
+                        {this.props.description}
 
                     </BackSide>
 
                 </Flippy>
-            </div>
+                </div>
         )
     }
 

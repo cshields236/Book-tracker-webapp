@@ -10,7 +10,7 @@ function Toolbar() {
         <div className={styles}>
             <nav>
                 <div className='logo' style={{transform: open ? "translateX(-500px)" : ""}}>Book Tracker</div>
-                <ul className='nav-links' style={{transform: open ? "translateX(0px)" : ""}}>
+                <ul className='nav-links' style={{transform: open ? "translateX(0px)" : ""}} onClick={() => setOpen(!open)}>
                     <li>
                         <Link to='/'>Home</Link></li>
                     <li>
