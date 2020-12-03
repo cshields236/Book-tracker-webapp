@@ -3,13 +3,14 @@ import React, { Component } from 'react'
 import FlipBook from '../Card/FlipBook'
 import styles from './Card.module.css'
 import Aux from 'react-aux';
+import Spinner from '../../UI/Spinner/Spinner';
 class Card extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             books: [],
-            loading: false,
+            loading: true,
 
 
         }
@@ -25,7 +26,7 @@ class Card extends Component {
                         ...res.data[key],
                         id: parseInt(key) + 1
                     })
-                    this.setState({ books: fetchedBooks })
+                    this.setState({ books: fetchedBooks, loading: false })
                 }
 
             })
@@ -33,31 +34,39 @@ class Card extends Component {
     }
     render() {
         // console.log(this.state.books);
+
+        let card = (<Spinner />)
+
+        if (!this.state.loading) {
+            card = (
+                <Aux>
+
+
+
+                    <h1>Your Library</h1>
+                    <div className={styles.Card} md="auto" >
+
+                        {this.state.books.map(book => (
+                            <FlipBook
+                                key={book.id}
+                                identifier={book.id}
+                                title={book.title}
+                                author={book.author}
+                                genre={book.genre}
+                                cover={book.cover}
+
+
+                            />
+
+                        ))}
+
+                    </div>
+                </Aux>
+
+            )
+        }
         return (
-            <Aux>
-
-
-
-                <h1>Your Library</h1>
-                <div className={styles.Card} md="auto" >
-
-                    {this.state.books.map(book => (
-                        <FlipBook
-                            key={book.id}
-                            identifier={book.id}
-                            title={book.title}
-                            author={book.author}
-                            genre={book.genre}
-                            cover={book.cover}
-
-
-                        />
-
-                    ))}
-
-                </div>
-            </Aux>
-
+            card
         )
     }
 }
