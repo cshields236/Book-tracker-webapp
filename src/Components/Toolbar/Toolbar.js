@@ -14,9 +14,9 @@ function Toolbar() {
                     <li>
                         <Link to='/'>Home</Link></li>
                     <li>
-                        <Link to='/view'>View List</Link></li>
+                        <Link to='/'>View List</Link></li>
                     <li>
-                        <Link to='/'>Add New Book</Link></li>
+                        <Link to='/add'>Add New Book</Link></li>
                     <li>
                         <Link to='/read'>View Read</Link></li>
                     <li>

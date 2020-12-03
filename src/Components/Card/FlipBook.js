@@ -23,7 +23,7 @@ class FlipBook extends Component {
 
     render() {
         let color = this.getRandomColor()
-        console.log(this.props.title);
+     
         return (
             <div className={classes.Flippy}>
                 <Flippy

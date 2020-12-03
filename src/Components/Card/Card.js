@@ -43,8 +43,8 @@ class Card extends Component {
 
                     {this.state.books.map(book => (
                         <FlipBook
-                            key = {book.id}
-                            identifier={book.id} 
+                            key={book.id}
+                            identifier={book.id}
                             title={book.title}
                             author={book.author}
                             genre={book.genre}

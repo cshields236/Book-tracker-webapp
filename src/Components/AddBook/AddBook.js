@@ -4,11 +4,13 @@ import classes from './AddBook.module.css'
 import Button from '../../UI/Button/Button'
 import Auxilery from '../../UI/HOC/Auxilery'
 import { storage } from '../../firebase'
+import xml2js from 'xml2js';
+
 
 class AddBook extends Component {
     constructor(props) {
         super(props)
-
+        this.submitBook = this.submitBook.bind(this)
 
         this.state = {
             title: '',
@@ -17,11 +19,14 @@ class AddBook extends Component {
             coverUrl: null,
             selectedFile: null,
             progress: 0,
+            info: {},
             bookAdded: null,
             disabled: false
 
         }
     }
+
+
 
 
     handleChange = (event) => {
@@ -69,6 +74,32 @@ class AddBook extends Component {
 
     }
 
+
+    submitBook() {
+
+        axios.post('http://127.0.0.1:5000/add-book', {
+
+            title: this.state.title,
+            author: this.state.author,
+            genre: this.state.genre,
+            avg_rating: this.state.info.average_rating,
+            coverUrl: this.state.coverUrl,
+            grID: this.state.info.best_book.id._
+
+
+        })
+            .then(res => {
+                if (res.data.success) {
+
+                    this.setState({
+                        bookAdded: true
+                    })
+                }
+            })
+
+
+
+    }
     handleSubmit = (event) => {
         if (this.state.selectedFile === null) {
             event.preventDefault()
@@ -78,22 +109,42 @@ class AddBook extends Component {
             this.setState({
                 disabled: true
             })
-            axios.post('http://127.0.0.1:5000/add-book', this.state).then(res => {
-                if (res.data.success) {
-                    console.log(res)
+            axios.get('https://cors-anywhere.herokuapp.com/https://www.goodreads.com/search/index.xml?', {
+                params: {
+                    per_page: 1,
+                    key: '7MFYkvoWpEg6bVvA6GuLyQ',
+                    q: this.state.title
+                },
+            }).then(res => {
+                xml2js.parseStringPromise(res.data, {
+                    explicitArray: false
+                }).then((res => {
+
+
+                    const list = res.GoodreadsResponse['search']
+
+                    const book = list.results.work
+
                     this.setState({
-                        bookAdded: true
+                        info: book
                     })
-                }
-            }).catch(err => {
-                console.log(err)
-            })
+                }))
+            }).then(
+
+
+                setTimeout = () => {
+                    this.submitBook()
+                }, 1000)
+
+
+
+
+
         }
     }
 
     render() {
-        console.log(this.state.progress);
-       
+
         return (
 
             <Auxilery>
@@ -130,19 +181,19 @@ class AddBook extends Component {
 
                         <div>
                         </div>
-                       
-                        <input
-                        style={{color: 'bisque'}}
-                        type='file' name='upload'
 
-                        value={this.state.coverImg}
-                        onChange={this.fileSelectedHandler}
-                        ref={fileInput => this.fileInput = fileInput} />
+                        <input
+                            style={{ color: 'bisque' }}
+                            type='file' name='upload'
+
+                            value={this.state.coverImg}
+                            onChange={this.fileSelectedHandler}
+                            ref={fileInput => this.fileInput = fileInput} />
                         <button onClick={this.handleUpload}>Upload</button>
                         <br />
                         <br />
                         <br />
-                      
+
                         <Button disabled={this.state.progress === 0 ? true : false} >Add Book</Button>
 
 
@@ -151,8 +202,7 @@ class AddBook extends Component {
                     <br />
                     <br />   <br />
                     <br />
-                   
-                    
+
                 </div>
 
 
@@ -160,11 +210,8 @@ class AddBook extends Component {
         )
     }
 
-    // TODO: Add rest of fields for data input
-    // TODO: Fix UI 
-    // TODO: Look into adding and saving pics 
-    // TODO: Sort out database 
-    // TODO: Add Routing 
+
+
 
 }
 

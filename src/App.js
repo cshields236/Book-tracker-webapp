@@ -11,8 +11,8 @@ class App extends Component {
       <div>
         <Router>
           <Toolbar />
-          <Route path='/' exact component={AddBook} />
-          <Route path='/view' exact component={Card} />
+          <Route path='/' exact component={Card} />
+          <Route path='/add' exact component={AddBook} />
         </Router>
       </div>
 
