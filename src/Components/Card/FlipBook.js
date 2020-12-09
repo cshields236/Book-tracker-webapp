@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Flippy, { FrontSide, BackSide } from 'react-flippy'
 import classes from './FlipBook.module.css'
-
+import SpringModal from '../../UI/SpringModal'
 class FlipBook extends Component {
     constructor(props) {
         super(props)
@@ -12,6 +12,7 @@ class FlipBook extends Component {
         }
     }
 
+
     getRandomColor() {
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -21,14 +22,18 @@ class FlipBook extends Component {
         return color;
     }
 
+    createMarkup() {
+        return { __html: this.props.description }
+    }
+
     render() {
         let color = this.getRandomColor()
-     
+
         return (
-       <div  className={classes.Flippy}>
+            <div className={classes.Flippy}>
                 <Flippy
-               
-                
+
+
                     flipOnHover={false} flipOnClick={true} flipDirection='horizontal' ref={(r) => this.flippy = r}
 
                 >
@@ -37,37 +42,23 @@ class FlipBook extends Component {
 
                     }} >
                         <img className={classes.photo} src={this.props.cover} alt='cover' />
-                        <b>{this.props.title}</b><br/>
-                          <b>{this.props.author}</b>
+                        <b>{this.props.title},</b><br />
+                        <b>{this.props.author}</b>
 
                     </FrontSide>
 
                     <BackSide
                         style={{
                             backgroundColor: '#ff5f6d',
-                            
-                            paddingTop: '30%'
+                            fontSize: '18px'
                         }}
                     >
-{/* 
-                        <b>Title:</b>
-                        <br />
-                        {this.props.title}
-                        <br />
-                        <b>Author:</b>
-                        <br />
-                        {this.props.author}
-                        <br />
-                        <b>Genre:</b>  <br />  {this.props.genre}
-                        <br />
-                        <b>isbn:</b>  <br />  {this.props.isbn} */}
-
-                        {this.props.description}
-
+                        <SpringModal description={this.props.description}/>
+                   
                     </BackSide>
 
                 </Flippy>
-                </div>
+            </div>
         )
     }
 

@@ -1,12 +1,12 @@
 img{
-    position: static;
-    width: 100%;
-    height:100%;
-   
+    float: left;
+    width:  370px;
+    height: 500px;
+    object-fit: cover;
 }
 .Flippy{
     height: 50%;
-     width:28%; 
+     width:24%; 
      padding: 30px;
 }
 
@@ -17,4 +17,27 @@ img{
         width: 70%;
         height: 80%;
     }
+
+    img{
+        float: left;
+        width: 100%;
+        height: 80%;
+    }
 }
+
+
+@media all and (max-width: 1536px){
+    .Flippy{
+        float: none;
+        margin: 0 auto;
+        width:40%;
+        height: 60%;
+    }
+
+    img{
+        float: left;
+        width: 100%;
+        height: 80%;
+    }
+}
+

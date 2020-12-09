@@ -5,7 +5,6 @@
     padding-top: 3%;
     text-align: center;
     font-size: 30px;
-    
 }
 
 .Form label{
@@ -50,6 +49,9 @@
     padding: 50px;
  }
 
+ProgressBar{
+    display: none;
+ }
 
 
 

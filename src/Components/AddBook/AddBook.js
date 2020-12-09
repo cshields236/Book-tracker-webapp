@@ -5,6 +5,7 @@ import Button from '../../UI/Button/Button'
 import Auxilery from '../../UI/HOC/Auxilery'
 import { storage } from '../../firebase'
 import xml2js from 'xml2js';
+import { CircularProgress  } from '@material-ui/core'
 
 
 class AddBook extends Component {
@@ -101,6 +102,7 @@ class AddBook extends Component {
 
     }
     handleSubmit = (event) => {
+
         if (this.state.selectedFile === null) {
             event.preventDefault()
             alert('Please Upload a Cover Image')
@@ -144,9 +146,7 @@ class AddBook extends Component {
     }
 
     render() {
-
         return (
-
             <Auxilery>
                 <div>
                     <br />
@@ -177,11 +177,8 @@ class AddBook extends Component {
                         </select>
                         <br />
                         <label>Upload Cover Image</label>   <br />
-
-
                         <div>
                         </div>
-
                         <input
                             style={{ color: 'bisque' }}
                             type='file' name='upload'
@@ -190,21 +187,19 @@ class AddBook extends Component {
                             onChange={this.fileSelectedHandler}
                             ref={fileInput => this.fileInput = fileInput} />
                         <button onClick={this.handleUpload}>Upload</button>
+                        
+                        <div>
+                             {/* <ProgressBar completed={this.state.progress} width={'40%'} bgcolor={'#ff5f6d'}   /> */}
+                             <CircularProgress  variant="determinate" value={this.state.progress} style={{color: ' #ff5f6d', paddingBottom: 0}} />
+                        </div>
                         <br />
                         <br />
                         <br />
 
                         <Button disabled={this.state.progress === 0 ? true : false} >Add Book</Button>
-
-
                     </form>
 
-                    <br />
-                    <br />   <br />
-                    <br />
-
                 </div>
-
 
             </Auxilery>
         )
