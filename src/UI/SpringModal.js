@@ -11,14 +11,28 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+
   },
   paper: {
     backgroundColor: 'bisque',
     color: 'black',
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
+  
     padding: theme.spacing(2, 4, 3),
   },
+  button:{
+    backgroundColor: 'transparent', 
+    border: 'none', 
+    color: 'bisque',
+    outline: 'none', 
+    cursor: 'pointer', 
+    font: 'inherit', 
+    padding: '10px',
+    margin: '10px', 
+    fontWeight: 'bold',
+    textDecoration:'underline'
+  }
 }));
 
 const Fade = React.forwardRef(function Fade(props, ref) {
@@ -70,8 +84,8 @@ export default function SpringModal(props) {
   
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        react-spring
+      <button type="button" onClick={handleOpen} className={classes.button}>
+        Description
       </button>
       <Modal
         aria-labelledby="spring-modal-title"

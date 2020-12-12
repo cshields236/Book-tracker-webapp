@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Flippy, { FrontSide, BackSide } from 'react-flippy'
 import classes from './FlipBook.module.css'
 import SpringModal from '../../UI/SpringModal'
+import ReactStars from 'react-stars'
 class FlipBook extends Component {
     constructor(props) {
         super(props)
@@ -22,9 +23,7 @@ class FlipBook extends Component {
         return color;
     }
 
-    createMarkup() {
-        return { __html: this.props.description }
-    }
+
 
     render() {
         let color = this.getRandomColor()
@@ -34,7 +33,7 @@ class FlipBook extends Component {
                 <Flippy
 
 
-                    flipOnHover={false} flipOnClick={true} flipDirection='horizontal' ref={(r) => this.flippy = r}
+                    flipOnHover={true} flipOnClick={false} flipDirection='horizontal' ref={(r) => this.flippy = r}
 
                 >
                     <FrontSide style={{
@@ -43,18 +42,31 @@ class FlipBook extends Component {
                     }} >
                         <img className={classes.photo} src={this.props.cover} alt='cover' />
                         <b>{this.props.title},</b><br />
-                        <b>{this.props.author}</b>
+
 
                     </FrontSide>
 
                     <BackSide
                         style={{
+                            paddingTop: '20%',
                             backgroundColor: '#ff5f6d',
-                            fontSize: '18px'
+                            fontSize: '20px',
+                            color: 'bisque',
+                            lineHeight: '2',
+                            textTransform: 'capitalize'
                         }}
                     >
-                        <SpringModal description={this.props.description}/>
-                   
+                        <b>Author:</b> {this.props.author}<br />
+                        <b>ISBN:</b> {this.props.isbn}<br />
+                        <b>Goodreads Rating:</b>  {this.props.avg_rating}<br />
+                        <b>Number of Pages:</b>  {this.props.num_pages}<br />
+                        <b>Year of Publication:</b>  {this.props.year_pub}<br />
+                        <b>Genre:</b> {this.props.genre} <br />
+
+
+
+                        <SpringModal description={this.props.description} />
+
                     </BackSide>
 
                 </Flippy>

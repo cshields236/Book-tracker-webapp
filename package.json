@@ -25,6 +25,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-spring": "^8.0.27",
+    "react-stars": "^2.2.5",
     "web-vitals": "^0.2.4",
     "xml2js": "^0.4.23"
   },

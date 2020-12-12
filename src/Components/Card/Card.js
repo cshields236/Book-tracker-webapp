@@ -55,6 +55,8 @@ class Card extends Component {
                                 isbn={book.isbn}
                                 avg_rating={book.avg_rating}
                                 description={book.description}
+                                num_pages={book.num_pages}
+                                year_pub={book.publication_year}
 
 
                             />
